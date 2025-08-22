@@ -62,40 +62,37 @@ public static void formalShoes_verifyTitle() throws IOException {
     }
 }
 
-//public static void formalShoes_verifyTitle() {
-//    String expectedTitleFS = "Formal ShoesPurposelyPutThisHereToFailThisTestAddedElseToIfStatement";
-//    String actualTitleFS = driver.findElement(By.xpath(formalShoes_xpath)).getText();
-//
-//    try {
-//        Assert.assertEquals(actualTitleFS, expectedTitleFS, "Formal Shoes NOT Found!");
-//        test.log(Status.PASS, "Test passed for title verification of Formal Shoes");
-//    } catch (AssertionError e) {
-//        test.log(Status.FAIL, "Test failed for title verification of Formal Shoes. Expected: "
-//                + expectedTitleFS + " but got: " + actualTitleFS);
-//        throw e; // rethrow so TestNG still marks test as failed
-//    }
-//}
-
-
-
-
-
-    public static void sportsShoes_verifyTitle(){
+    public static void sportsShoes_verifyTitle() throws IOException {
         String expectedTitleSS = "Sports Shoes";
         String actualTitleSS = driver.findElement(By.xpath(sportShoes_xpath)).getText();
         Assert.assertEquals(actualTitleSS, expectedTitleSS, "Sports Shoes NOT Found!");
         if(expectedTitleSS.equals(actualTitleSS)){
-            test.log(Status.PASS, "Test passed for title verification of Sports Shoes");
+            test.pass("Test passed for Sports Shoes", MediaEntityBuilder.createScreenCaptureFromPath(SeleniumTest.capture(driver)).build());
+        } else{
+            test.fail("Test failed for Sports Shoes", MediaEntityBuilder.createScreenCaptureFromPath(SeleniumTest.captureElementOnly(driver, By.xpath(sportShoes_xpath)))
+                    .build());
+            throw new AssertionError("Sports Shoes title mismatch. Expected: " + expectedTitleSS + " but got: " + actualTitleSS);
         }
     }
-    public static void sneakers_verifyTitle(){
-        String expectedTitleS = "Sneakers";
-        String actualTitleS = driver.findElement(By.xpath(sneakers_xpath)).getText();
-        Assert.assertEquals(actualTitleS, expectedTitleS, "Sneakers NOT Found!");
-        if(expectedTitleS.equals(actualTitleS)){
-            test.log(Status.PASS, "Test passed for title verificaton of Sneakers");
-        }
+//    public static void sneakers_verifyTitle(){
+//        String expectedTitleS = "Sneakers";
+//        String actualTitleS = driver.findElement(By.xpath(sneakers_xpath)).getText();
+//        Assert.assertEquals(actualTitleS, expectedTitleS, "Sneakers NOT Found!");
+//        if(expectedTitleS.equals(actualTitleS)){
+//            test.log(Status.PASS, "Test passed for title verificaton of Sneakers");
+//        }
+//    }
+public static void sneakers_verifyTitle() throws IOException {
+    String expectedTitleS = "Sneakers";
+    String actualTitleS = driver.findElement(By.xpath(sneakers_xpath)).getText();
+    Assert.assertEquals(actualTitleS, expectedTitleS, "Sneakers NOT Found!");
+    if(expectedTitleS.equals(actualTitleS)){
+        test.pass("Test passed for Sneakers", MediaEntityBuilder.createScreenCaptureFromPath(SeleniumTest.capture(driver)).build());
+    } else {
+        test.fail("Test failed for Sneakers", MediaEntityBuilder.createScreenCaptureFromPath(SeleniumTest.captureElementOnly(driver, By.xpath(sneakers_xpath))).build());
+        throw new AssertionError("Sneakers title mismatch. Expected: " + expectedTitleS + " but got: " + actualTitleS);
     }
+}
 
 //DropDown methods
     public static void formalShoes_firstShoe_verify(){
